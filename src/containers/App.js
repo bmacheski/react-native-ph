@@ -3,6 +3,7 @@ import MainContainer from './MainContainer';
 
 let {
   Navigator,
+  View
 } = React
 
 class App extends React.Component {
@@ -13,7 +14,11 @@ class App extends React.Component {
   renderScene(route, navigator) {
     let Component = route.component;
 
-    return <Component navigator={navigator} route={route} />
+    return (
+      <View>
+        <Component navigator={navigator} route={route} />
+      </View>
+    );
   }
 
   render() {
@@ -22,7 +27,7 @@ class App extends React.Component {
         renderScene={this.renderScene}
         initialRoute={{
           component: MainContainer,
-          name: 'Main'
+          title: 'Product Hunt RN'
         }}
       />
     )

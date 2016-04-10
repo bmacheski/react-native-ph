@@ -1,10 +1,8 @@
-import secrets from '../../secrets';
 import * as types from '../constants/actionTypes';
 
-function requestProducts(query) {
+function requestProducts() {
   return {
-    type: types.request_songs,
-    query
+    type: types.request_products
   }
 }
 
@@ -15,32 +13,28 @@ function receiveProducts(products) {
   }
 }
 
-function receiveUserData(token) {
+function config(token) {
   return {
-    type: types.receive_user_data,
-    token
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Host': 'api.producthunt.com',
+    'Authorization': 'Bearer ' + token
   }
 }
 
-export function handleToken() {
-  let authObj = {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Host': 'api.producthunt.com',
-      'Origin': ''
-    },
-    body: JSON.stringify({
-     'client_id': secrets.apiKey,
-      'client_secret': secrets.apiSecret,
-      'grant_type': 'client_credentials'
-    })
+export function fetchProducts(data) {
+  let header = config(data.token);
+  let prodObj = {
+    method: 'GET',
+    headers: header
   }
 
   return dispatch => {
-    return fetch('https://api.producthunt.com/v1/oauth/token', authObj)
+    dispatch(requestProducts())
+    return fetch('https://api.producthunt.com/v1/posts', prodObj)
     .then(res => res.json())
-    .then(json => dispatch(receiveUserData(json)))
+    .then(json =>  {
+      dispatch(receiveProducts(json))
+    })
   }
 }

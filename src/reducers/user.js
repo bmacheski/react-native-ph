@@ -4,7 +4,7 @@ const user = (state = {}, action) => {
   switch (action.type) {
     case types.receive_user_data:
       return Object.assign({}, state, {
-        token: action.token.access_token
+        token: action.token
       });
 
     default:
