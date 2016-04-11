@@ -3,8 +3,10 @@ import MainContainer from './MainContainer';
 
 let {
   Navigator,
-  View
+  View,
+  StyleSheet
 } = React
+
 
 class App extends React.Component {
   constructor(props) {
@@ -15,8 +17,11 @@ class App extends React.Component {
     let Component = route.component;
 
     return (
-      <View>
-        <Component navigator={navigator} route={route} />
+      <View style={styles.wrapper}>
+        <Component
+          navigator={navigator}
+          route={route}
+        />
       </View>
     );
   }
@@ -30,8 +35,15 @@ class App extends React.Component {
           title: 'Product Hunt RN'
         }}
       />
-    )
+    );
   }
 }
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    flexDirection: 'column'
+  }
+});
 
 export default App;

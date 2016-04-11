@@ -8,7 +8,7 @@ let {
   Text,
   ListView,
   StyleSheet,
-  ActivityIndicatorIOS,
+  ActivityIndicatorIOS
 } = React;
 
 class Main extends React.Component {
@@ -33,6 +33,7 @@ class Main extends React.Component {
   renderProductItem(item) {
     return (
       <ProductItem
+        style={styles.item}
         item={item}
       />
     );
@@ -40,11 +41,11 @@ class Main extends React.Component {
 
   renderProductList() {
     const { products } = this.props;
-
     const dataSource = this.state.dataSource.cloneWithRows(products);
 
     return (
       <ListView
+        style={styles.list}
         dataSource={dataSource}
         renderRow={this.renderProductItem.bind(this)}
       />
@@ -75,10 +76,9 @@ class Main extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
   }
 });
 

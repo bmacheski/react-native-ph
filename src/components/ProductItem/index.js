@@ -4,19 +4,29 @@ let {
   View,
   Text,
   TouchableHighlight,
-  StyleSheet
+  StyleSheet,
+  Image,
+  Dimensions
 } = React;
+
+let { width } = Dimensions.get('window');
 
 class ProductItem extends React.Component {
 
   render() {
     return (
-      <TouchableHighlight>
-        <View style={styles.li}>
-          <Text>name: {this.props.item.name}</Text>
-          <Text>tagline: {this.props.item.tagline}</Text>
+      <View style={styles.li}>
+        <View>
+          <Image
+            style={styles.icon}
+            source={{ uri: this.props.item.thumbnail.image_url }}
+          />
         </View>
-      </TouchableHighlight>
+        <View>
+          <Text style={styles.title}>{this.props.item.name}</Text>
+          <Text style={styles.tagline}>{this.props.item.tagline}</Text>
+        </View>
+      </View>
     );
   }
 }
@@ -28,8 +38,23 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     borderWidth: 1,
     paddingLeft: 16,
+    flex: 1,
     paddingTop: 10,
     paddingBottom: 10,
+    flexDirection: 'row',
+  },
+  icon: {
+    width: 40,
+    height: 40,
+    marginRight: 10
+  },
+  title: {
+    fontSize: 18,
+  },
+  tagline: {
+    flex: 1,
+    width: width - 60,
+    flexWrap: 'wrap',
   }
 })
 
