@@ -2,6 +2,7 @@ import React from 'react-native';
 import { handleToken } from '../../actions/user';
 import { fetchProducts } from '../../actions/products';
 import ProductItem from '../ProductItem';
+import ProductContainer from '../../containers/ProductContainer';
 
 let {
   View,
@@ -15,6 +16,7 @@ class Main extends React.Component {
 
   constructor(props) {
     super(props);
+    this.handleTransition = this.handleTransition.bind(this);
     this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
@@ -23,11 +25,20 @@ class Main extends React.Component {
   }
 
   componentWillMount() {
-    const { dispatch, token } = this.props;
+    const { dispatch, token, navigator } = this.props;
 
     if (!token) {
       dispatch(handleToken());
     }
+  }
+
+  handleTransition(item) {
+    const { navigator } = this.props;
+
+    navigator.push({
+      component: ProductContainer,
+      id: item.id
+    })
   }
 
   renderProductItem(item) {
@@ -35,6 +46,7 @@ class Main extends React.Component {
       <ProductItem
         style={styles.item}
         item={item}
+        handleTransition={this.handleTransition.bind(this, item)}
       />
     );
   }
@@ -56,7 +68,7 @@ class Main extends React.Component {
     return (
       <ActivityIndicatorIOS
         animating={true}
-        style={[{height: 80}]}
+        style={[{ height: 80 }]}
         size="large"
       />
     );

@@ -1,5 +1,6 @@
 import React from 'react-native';
 import MainContainer from './MainContainer';
+import NavBar from '../components/NavBar';
 
 let {
   Navigator,
@@ -9,6 +10,7 @@ let {
 
 
 class App extends React.Component {
+
   constructor(props) {
     super(props);
   }
@@ -18,6 +20,10 @@ class App extends React.Component {
 
     return (
       <View style={styles.wrapper}>
+        <NavBar
+          title={route.title}
+          navigator={navigator}
+        />
         <Component
           navigator={navigator}
           route={route}

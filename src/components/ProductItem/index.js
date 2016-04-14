@@ -13,19 +13,29 @@ let { width } = Dimensions.get('window');
 
 class ProductItem extends React.Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    const { handleTransition } = this.props;
+
     return (
       <View style={styles.li}>
-        <View>
-          <Image
-            style={styles.icon}
-            source={{ uri: this.props.item.thumbnail.image_url }}
-          />
-        </View>
-        <View>
-          <Text style={styles.title}>{this.props.item.name}</Text>
-          <Text style={styles.tagline}>{this.props.item.tagline}</Text>
-        </View>
+        <TouchableHighlight onPress={handleTransition}>
+          <View>
+            <View>
+              <Image
+                style={styles.icon}
+                source={{ uri: this.props.item.thumbnail.image_url }}
+              />
+            </View>
+            <View>
+              <Text style={styles.title}>{this.props.item.name}</Text>
+              <Text style={styles.tagline}>{this.props.item.tagline}</Text>
+            </View>
+          </View>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -56,6 +66,6 @@ const styles = StyleSheet.create({
     width: width - 60,
     flexWrap: 'wrap',
   }
-})
+});
 
 export default ProductItem;
