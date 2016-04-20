@@ -15,11 +15,13 @@ function mapStateToProps(state) {
   const { token } = state.user;
   const products  = state.products.items.length > 0 ? state.products.items : [];
   const { isFetching } = state.products;
+  const { categories } = state;
 
   return {
     token,
     products,
-    isFetching
+    isFetching,
+    categories
   }
 }
 

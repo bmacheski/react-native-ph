@@ -1,6 +1,7 @@
 import secrets from '../../secrets';
 import * as types from '../constants/actionTypes';
 import { fetchProducts } from './products';
+import { fetchCategories } from './categories';
 
 function receiveUserData(token) {
   return {
@@ -33,6 +34,7 @@ export function handleToken() {
 
       dispatch(receiveUserData(data));
       dispatch(fetchProducts(data));
+      dispatch(fetchCategories(data));
     })
   }
 }

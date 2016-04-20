@@ -8,6 +8,7 @@
   "dependencies": {
     "react": "^0.14.8",
     "react-native": "^0.23.1",
+    "react-native-side-menu": "^0.18.0",
     "react-redux": "^4.4.2",
     "redux": "^3.4.0",
     "redux-thunk": "^2.0.1"

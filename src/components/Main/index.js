@@ -1,8 +1,10 @@
 import React from 'react-native';
+import SideMenu from 'react-native-side-menu';
 import { handleToken } from '../../actions/user';
 import { fetchProducts } from '../../actions/products';
 import ProductItem from '../ProductItem';
 import ProductContainer from '../../containers/ProductContainer';
+import Menu from '../Menu';
 
 let {
   View,
@@ -75,12 +77,17 @@ class Main extends React.Component {
   }
 
   render() {
-    const { isFetching } = this.props;
+    const { isFetching, categories } = this.props;
+    const menu = <Menu categories={categories} />;
 
     return (
-      <View style={styles.container}>
-        { isFetching ? this.renderLoadingScreen() : this.renderProductList()}
-      </View>
+      <SideMenu
+        isOpen={false}
+        menu={menu}>
+        <View style={styles.container}>
+          { isFetching ? this.renderLoadingScreen() : this.renderProductList() }
+        </View>
+      </SideMenu>
     );
   }
 }
@@ -90,6 +97,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
+    backgroundColor: '#fff',
     alignItems: 'center',
   }
 });
