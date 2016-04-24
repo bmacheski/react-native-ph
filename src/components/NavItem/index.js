@@ -1,4 +1,5 @@
 import React from 'react-native';
+import { fetchProducts } from '../../actions/products';
 
 let {
   View,
@@ -13,15 +14,22 @@ class NavItem extends React.Component {
     super(props);
   }
 
+  handleTransition(data) {
+    const { token, dispatch } = this.props;
+    const category = data.slug;
+
+    dispatch(fetchProducts(token, category));
+  }
+
   render() {
     const { item } = this.props;
 
     return (
       <View style={styles.li}>
-        <TouchableHighlight>
+        <TouchableHighlight onPress={this.handleTransition.bind(this, item)}>
           <View>
             <View>
-              <Text>{item.name}</Text>
+              <Text>{ item.name }</Text>
             </View>
           </View>
         </TouchableHighlight>
@@ -36,7 +44,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#eee',
     borderColor: 'transparent',
     borderWidth: 1,
-    paddingLeft: 16,
+    paddingLeft: 20,
     flex: 1,
     paddingTop: 10,
     paddingBottom: 10,

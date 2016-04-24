@@ -33,7 +33,7 @@ class ItemDetail extends React.Component {
 
 const styles = StyleSheet.create({
   icon: {
-    width: 200,
+    width: 400,
     height: 200,
     flex: 1
   }

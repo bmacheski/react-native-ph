@@ -77,15 +77,22 @@ class Main extends React.Component {
   }
 
   render() {
-    const { isFetching, categories } = this.props;
-    const menu = <Menu categories={categories} />;
+    const { isFetching, categories, token, dispatch } = this.props;
+
+    const menu = (
+      <Menu
+        categories={categories}
+        token={token}
+        dispatch={dispatch}
+      />
+    );
 
     return (
       <SideMenu
         isOpen={false}
         menu={menu}>
         <View style={styles.container}>
-          { isFetching ? this.renderLoadingScreen() : this.renderProductList() }
+          {isFetching ? this.renderLoadingScreen() : this.renderProductList()}
         </View>
       </SideMenu>
     );
@@ -95,6 +102,7 @@ class Main extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingLeft: 20,
     flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: '#fff',

@@ -24,10 +24,14 @@ class Menu extends React.Component {
   }
 
   renderNavItem(item) {
+    const { token, dispatch } = this.props;
+
     return (
       <NavItem
         style={styles.item}
         item={item}
+        token={token}
+        dispatch={dispatch}
       />
     );
   }
@@ -59,6 +63,7 @@ class Menu extends React.Component {
 const styles = StyleSheet.create({
   menu: {
     flex: 1,
+    paddingLeft: 20,
     width: window.width,
     height: window.height,
     backgroundColor: 'gray',

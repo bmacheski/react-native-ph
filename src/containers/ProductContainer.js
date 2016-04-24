@@ -12,7 +12,8 @@ class ProductContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const products  = state.products.items.length > 0 ? state.products.items : [];
+  const { currentCategory } = state.products;
+  const products  = state.products[currentCategory] && state.products[currentCategory].items ? state.products[currentCategory].items : [];
 
   return {
     products

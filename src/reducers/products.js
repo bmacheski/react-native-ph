@@ -5,17 +5,36 @@ const initialState = {
   items: []
 };
 
-const products = (state = initialState, action) => {
+function product(state = initialState, action) {
+  switch (action.type) {
+    case types.receive_products:
+      return Object.assign({}, state, {
+        isFetching: true,
+        items: [...state.items, ...action.products.posts]
+      });
+
+    case types.request_products:
+      return Object.assign({}, state, {
+        isFetching: false
+      });
+
+    default:
+      return state
+  }
+}
+
+const products = (state = {}, action) => {
   switch (action.type) {
     case types.request_products:
       return Object.assign({}, state, {
-        isFetching: true
+        currentCategory: action.category,
+        [action.category]: product(state[action.category], action)
       });
 
     case types.receive_products:
       return Object.assign({}, state, {
-        isFetching: false,
-        items: [...state.items, ...action.products.posts],
+        currentCategory: action.category,
+        [action.category]: product(state[action.category], action)
       });
 
     default:

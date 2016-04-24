@@ -7,13 +7,14 @@ class MainContainer extends React.Component {
   render() {
     return (
       <Main {...this.props} />
-    )
+    );
   }
 }
 
 function mapStateToProps(state) {
   const { token } = state.user;
-  const products  = state.products.items.length > 0 ? state.products.items : [];
+  const { currentCategory } = state.products;
+  const products  = state.products[currentCategory] && state.products[currentCategory].items ? state.products[currentCategory].items : [];
   const { isFetching } = state.products;
   const { categories } = state;
 

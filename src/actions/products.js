@@ -1,15 +1,17 @@
 import * as types from '../constants/actionTypes';
 
-function requestProducts() {
+function requestProducts(category) {
   return {
-    type: types.request_products
+    type: types.request_products,
+    category
   }
 }
 
-function receiveProducts(products) {
+function receiveProducts(products, category) {
   return {
     type: types.receive_products,
-    products
+    products,
+    category
   }
 }
 
@@ -22,19 +24,24 @@ function config(token) {
   }
 }
 
-export function fetchProducts(data) {
+export function fetchProducts(data, cat) {
   let header = config(data.token);
   let prodObj = {
     method: 'GET',
     headers: header
-  }
+  };
 
   return dispatch => {
-    dispatch(requestProducts())
-    return fetch('https://api.producthunt.com/v1/posts', prodObj)
-    .then(res => res.json())
-    .then(json =>  {
-      dispatch(receiveProducts(json))
-    })
+    let category = cat ? cat : 'tech';
+    let url = cat
+      ? `https://api.producthunt.com/v1/categories/${category}/posts`
+      : 'https://api.producthunt.com/v1/posts'
+
+    dispatch(requestProducts(category));
+    return fetch(url, prodObj)
+      .then(res => res.json())
+      .then(json =>  {
+        dispatch(receiveProducts(json, category));
+      })
   }
 }
