@@ -29,7 +29,7 @@ class NavItem extends React.Component {
         <TouchableHighlight onPress={this.handleTransition.bind(this, item)}>
           <View>
             <View>
-              <Text>{ item.name }</Text>
+              <Text>{item.name}</Text>
             </View>
           </View>
         </TouchableHighlight>

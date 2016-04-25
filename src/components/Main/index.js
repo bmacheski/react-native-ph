@@ -1,7 +1,6 @@
 import React from 'react-native';
 import SideMenu from 'react-native-side-menu';
 import { handleToken } from '../../actions/user';
-import { fetchProducts } from '../../actions/products';
 import ProductItem from '../ProductItem';
 import ProductContainer from '../../containers/ProductContainer';
 import Menu from '../Menu';
